@@ -6,3 +6,32 @@ php artisan list
 php artisan serve
 
 php artisan migrate
+
+php artisan about
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
