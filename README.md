@@ -534,21 +534,38 @@ public function __construct() {
     $this->middleware('auth')->except(['index']);
 }
 
+## Delete Record
+as above.
+
+## auto search again.
+{{ $artice->created_at }} from {{ $article->user-name }} shared.
+                                          *search again.
 
 
+## Laravel plugins.
+
+1. Laravel debugbar.
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+composer require barryvdh/laravel-debugbar --dev
+vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+
+## N+1:
+eager-loading > $book = App\Models\Book::with('author')->get();
+                                        *with help eager query.
 
 
+## npm i packagename <=> yarn add packagename
+yarn add jquery
 
+in app.js
 
+require('./bootstrap');
 
+window.$ = window.jQuery = require('jquery');
 
+--> npm run dev
 
-
-
-
-
-
-
+npm run watch
 
 
 

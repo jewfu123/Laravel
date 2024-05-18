@@ -86,6 +86,10 @@ class ArticleController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        //echo "delete id: " . $id;
+        //$article = auth()->user()->articles->find($id);
+        $article = Article::findOrFail($id);
+        $article->delete();
+        return redirect()->route('article.index')->with('notice', 'Article is deleted successed!');
     }
 }
