@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Post;
 
 class MyPostsController extends Controller
 {
@@ -35,7 +36,11 @@ class MyPostsController extends Controller
      */
     public function show(string $id)
     {
-        //
+        //echo "haha" . $id . Post::findOrFail($id);
+        return view('post', [
+            'post' => Post::findOrFail($id)
+        ]);
+
     }
 
     /**

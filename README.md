@@ -382,21 +382,47 @@ action:
 php artisan db:seed // run DatabaseSeeder.php
 php artisan db:seed --class=StoreSeeder // run specified php class function
 
+## Controller
+php artisan make:controller PhotoController --model=Photo --resource
 
+php artisan make:model xxx -m
 
+php artisan make:view xxx
 
+*add notice message:
+return redirect()->route('root')->with('notice', 'article create successed!');
 
+```PHP
+controller.php
 
+public function show(string $id)
+{
+    //echo "haha" . $id . Post::findOrFail($id);
+    return view('post', [
+        'post' => Post::findOrFail($id)
+    ]);
 
+}
 
+Model -> Post
 
+protected $fillable = [
+    'id',
+    'title',
+    'content',
+];
 
+view -> post.blade.php
 
+<div>
+    <h5>{{$post['id']}}</h5>
+    <h1>{{$post['title']}}</h1>
+    <h2>{{$post['content']}}</h2>
+</div>
 
+route -> web.php
 
-
-
-
+Route::resource('posts', MyPostsController::class)->only(['index','show']);
 
 
 
