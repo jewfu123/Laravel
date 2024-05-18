@@ -385,9 +385,12 @@ php artisan db:seed --class=StoreSeeder // run specified php class function
 ## Controller
 php artisan make:controller PhotoController --model=Photo --resource
 
+php artisan make:controller PostController --api
+
 php artisan make:model xxx -m
 
 php artisan make:view xxx
+
 
 *add notice message:
 return redirect()->route('root')->with('notice', 'article create successed!');
@@ -423,22 +426,113 @@ view -> post.blade.php
 route -> web.php
 
 Route::resource('posts', MyPostsController::class)->only(['index','show']);
+*above must be used new Controller, for example:
+use App\Http\Controllers\ArticleController;
+
+## Article -> crud
+php artisan make:model Article -m 
+
+migration -> migrate
+```PHP
+Model: Article.php
+Schema::create('articles', function (Blueprint $table) {
+    $table->id();
+    $table->sring('title');
+    $table->text('content');
+    $table->enum('state', ['draft','published']);
+    $table->softDeletes();
+    $table->foreignId('user_id');
+    $table->timestamps();
+});
 
 
+Controller =>
+index()
+
+public function index()
+{
+    $articles = Article::all();
+    return view('article.index',compact('articles'));  // a.
+
+    return view('article.index', [
+             'articles' => $articles                   // b.
+    ]);
+    
+    return view('article.index', [
+             'articles' => Article::all()
+    ]);
+
+}
+
+store()
+
+public function store(Request $request)
+{
+    $request->validate([
+        'title' => 'required|max:255',
+        'user_id' => 'required|max:10',
+        'state' => 'required|max:2',
+        'content' => 'required',
+    ]);
+
+    Article::create($request->all());
+    return redirect()->route('article.index')
+            ->with('success','Article created successfully.');
+}
+
+view file ->
+<form action="{{ route('article.store') }}" method="post">
+    @csrf
+    <lable for="">Title </lable>
+    <input type="text" name="title"/>
+    <lable for="">Content </lable>
+    <input type="text" name="content"/>
+    <lable for="">user_id </lable>
+    <input type="text" name="user_id"/>
+    <button type="submit" value="submit">Submit</button>
+</form>
+
+@csrf -> insert into view file. is very import!
+
+*about post type submit, check fields count? type? validate? all right then can be insert.
+about enum: '','','',... the number is from 1..n.
+
+*@csrf                  //add hidden code for csrf
+*@method('patch')       //add hidden code to tell server this is path method can be passed.
+
+* migration set default for enum method:
+$table->enum('state', ['draft','published'])->default('draft');
+
+View file insert check error validate:
+
+@if($errors->any())
+    <div>
+        <ul>
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
 
+$a->title <==> $a['title']
 
+```
 
+## Order by records
 
+$articles = Article::orderBy('id', 'desc')->paginate(3); // desc and paginate by 3 pages.
 
+<a href="{{ route('articles.show', $article) }}">
+    {{ $article->title }}
+</a>
 
+## open or close any functions.
 
-
-
-
-
-
-
+public function __construct() {
+    $this->middleware('auth')->except(['index']);
+}
 
 
 

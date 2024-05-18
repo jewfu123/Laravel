@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HelloController;
 use App\Http\Controllers\MyPostsController;
+use App\Http\Controllers\ArticleController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,3 +28,5 @@ Route::get('/about', [HelloController::class, 'about']);
 //Route::resource('posts', MyPostsController::class);
 Route::resource('posts', MyPostsController::class)->only(['index','show']);
 Route::resource('posts.comments', MyPostsController::class);
+
+Route::resource('article', ArticleController::class);//->only(['index','show']);
