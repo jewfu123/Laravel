@@ -568,14 +568,33 @@ window.$ = window.jQuery = require('jquery');
 npm run watch
 
 
+## Seeding from one Seeder
+
+php artisan db:seed --class=DatabaseSeeder
 
 
+## drop table 
+
+$ php artisan make:migration drop_user_table
+
+$ php artisan migrate
 
 
+You can also rollback if you want to drop your last migrated table
 
+php artisan migrate:rollback
+The migrate:reset command will roll back all of your application's migrations:
 
+php artisan migrate:reset
+The migrate:fresh command will drop all tables from the database and then execute the migrate command:
 
+php artisan migrate:fresh
 
+php artisan migrate:fresh --seed
+
+php artisan migrate:rollback  --path=/database/migrations/22_03_18_010_create_users_table.php
+
+php artisan migrate:refresh --path=/database/migrations/22_03_18_010_create_users_table.php
 
 
 
