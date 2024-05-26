@@ -596,11 +596,35 @@ php artisan migrate:rollback  --path=/database/migrations/22_03_18_010_create_us
 
 php artisan migrate:refresh --path=/database/migrations/22_03_18_010_create_users_table.php
 
+## sqlite points.
 
+set full path:
+DB_DATABASE=C:\xampp\htdocs\laravel10_11_crud\laravel_basic_crud
 
+## crud:
+route('products.index')
+```HTML
+@crsf
+<form action="" method="POST" enctype="multipart-forms">
+</form>
 
+<img src="" alt="" class="img-product" id="file-preview" />
+<input type="file" name="image" accept="image/*" onchange="showFile(event)" />
 
+<script>
+    function showFile(event) {
+        var input = event.target;
+        var reader = new FileReader();
+        reader.onload = function() {
+            var dataURL = reader.result;
+            var output = document.getElementById('file-preview');
+            output.src = dataURL;
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+</script>
 
+```
 
 
 
