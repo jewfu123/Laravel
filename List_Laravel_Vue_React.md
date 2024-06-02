@@ -175,11 +175,70 @@ in Middleware GuestOrVerified.php
 class GuestOrVerified extends \Illuminate\Auth\Middleware\EnsureEmailIsVerified
 
 
+----------------------------------------------------------------------------------------------------------------------
+Laravel + React.js Full Stack CRUD and Authentication Project [LxgdcUSFUXA].mp4
+https://github.com/derderian7/laravel_react_project/tree/main/laravel_react_project
+
+00:00:00 Introduction
+00:01:12 Installation and setup
+00:06:40 Setting up the layouts
+00:18:11 Context Provider
+00:26:45 Auth pages
+00:44:01 Auth APIs
+01:02:19 Users Page
+01:04:40 Users APIs
+01:10:00 User Form and table
+
+## about router in react and vue.
+
+```PHP
+in vue:
+
+{
+    path: '/app',
+    name: 'app',
+    redirect: '/app/dashboard',
+    component: AppLayout,
+    meta: {
+      requiresAuth: true
+    },
+    children: [
+      {
+        path: 'dashboard',
+        name: 'app.dashboard',
+        component: Dashboard
+      },
+      {
+        path: 'products',
+        name: 'app.products',
+        component: Products
+      },
+      ..
+    ]
+}
 
 
+in react:
 
-
-
+const router = createBrowserRouter ([
+{
+    path: '/',
+    element: <DefaultLayout />,
+    children: [
+        {
+            path: '/users',
+            element: <Users />,
+        },
+        {
+            path: '/users/new',
+            element: <UserForm key="userCreate"/>
+        },
+        {
+            path: '/users/:id',
+            element: <UserForm key="userUpdate" />
+        },
+    ]
+},
 
 
 
