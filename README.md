@@ -626,13 +626,20 @@ route('products.index')
 
 ```
 
+#### Laravel command:
+```shell
+composer require laravel/ui
 
+php artisan config:publish broad casting
+```
 
+#### php + composer.phar
+```shell
+mv composer.phar /usr/local/bin/composer
 
-
-
-
-
+php composer install
+..
+```
 
 
 
