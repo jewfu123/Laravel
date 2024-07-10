@@ -641,6 +641,86 @@ php composer install
 ..
 ```
 
+## Laravel5.5
+```shell
+composer create-project --prefer-dist laravel/laravel blog "5.5.*"
+```
+#### Optimizing Configuration Loading
+```shell
+php artisan config:cache
+php artisan route:cache
+```
+#### install debug bar:
+```shell
+install debugbar:
+composer require barryvdh/laravel-debugbar
+```
+
+You are running Composer with SSL/TLS protection disabled.
+```shell
+set false:
+composer config --global disable-tls true
+composer config --global secure-http false
+
+set true:
+composer config --global disable-tls false
+composer config --global secure-http true
+```
+
+-------------------->
+```shell
+step1 composerを使いlaravel-debugbarをインストール
+composer require barryvdh/laravel-debugbar
+
+step2 デバッグバーの設定ファイルを生成
+php artisan vendor:publish --provider="Barryvdh\Debugbar\ServiceProvider"
+
+step3 .envにデバッグバーを有効化するコードを追加
+.env
+DEBUGBAR_ENABLED=true
+
+step4 composerの読み直し
+composer dump-autoload
+
+step5 config等のキャッシュをクリア
+php artisan cache:clear && php artisan config:clear
+
+step6 ビルトインサーバーを起動
+php artisan serve --host 0.0.0.0 --port=80
+
+step7 デバッグバーの表示を確認
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
