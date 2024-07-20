@@ -690,22 +690,130 @@ php artisan serve --host 0.0.0.0 --port=80
 
 step7 デバッグバーの表示を確認
 ```
+## Laravel Deploy：
+1. Server Requirements
+*open extension in php.ini and apache.
+https://laravel.com/docs/11.x/deployment#introduction
 
+2. Directory Permissions
 
+3. Optimization
+php artisan optimize
+php artisan optimize:clear
 
+4. Caching Configuration
+php artisan config:cache
 
+5. Caching Events
+php artisan event:cache
 
+6. Caching Routes
+php artisan route:cache
 
+7. Caching Views
+php artisan view:cache
 
+8. Debug Mode
 
+9. The Health Route
 
+```shell
+php composer.phar --version
 
+composer -version
 
+git clone url sitename
 
+cd your site's path
 
+composer install
 
+php artisan key:generate --ansi
 
+php artisan storage:link
 
+ln -s public public_html
+
+ready database and set access acount in .env
+```
+## VSCode + XDebug3.4 + Apache配置：
+1. htdocs static file setting.
+    \htdocs\project\pathx\access...
+    ```shell
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Listen for Xdebug",
+            "type": "php",
+            "request": "launch",
+            "port": 9003
+        },
+    ```
+2. as a server running setting.
+    php artisan serve --> hostname port
+
+    put above hostname and port setting in bellow setting file: launch.json
+    ```shell
+    {
+            "name": "Launch Built-in web server",
+            "type": "php",
+            "request": "launch",
+            "runtimeArgs": [
+                "-S",
+                "localhost:8000",
+                "-t",
+                "."
+            ],
+            "program": "",
+            "cwd": "${workspaceRoot}/public",
+            "port": 9003,
+            "serverReadyAction": {
+                "action": "openExternally"
+            }
+        }
+    ```
+    * 9003 as same as the apache server's php.ini-> xdebug.ini ...
+    localhost:8000 is above running server's.
+
+## VSCode + XDebug2.2 + Centos5.9 httpd 配置：
+1. xdebug setting.
+```shell
+zend_extension=/usr/lib64/php/modules/xdebug.so
+
+xdebug.remote_enable = 1
+xdebug.remote_autostart = 1
+xdebug.remote_connect_back = 1
+xdebug.remote_log = /var/log/xdebug.log
+xdebug.remote_port = 9003
+xdebug.max_nesting_level = 512
+```
+
+2. launch.json in vscode.
+```shell
+{
+    "name": "Launch Built-in web server",
+    "type": "php",
+    "request": "launch",
+    "runtimeArgs": [
+        "-dxdebug.mode=debug",
+        "-dxdebug.start_with_request=yes",
+        "-S",
+        "localhost:9003"
+    ],
+    "program": "",
+    "cwd": "${workspaceRoot}",
+    "port": 9003,
+    "serverReadyAction": {
+        "pattern": "Development Server \\(https://localhost:([0-9]+)\\) started",
+        "uriFormat": "https://localhost:%s",
+        "action": "openExternally"
+    },
+    "pathMappings": {
+        "serverSourceRoot": "/usr/local/apache/vhosts/xxxxx/htdocs",
+        "localSourceRoot": "${workspaceFolder}/"
+    }
+}
+```
 
 
 
